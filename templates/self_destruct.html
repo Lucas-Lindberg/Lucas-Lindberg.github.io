@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Self-Destruct Sequence</title>
+</head>
+<body>
+    <div class="self-destruct-container">
+        <div id="passwordSection">
+            <h1>Self-Destruct Sequence</h1>
+            <form onsubmit="return confirmPassword()">
+                <label for="password">Enter Password:</label>
+                <input type="password" id="password" name="password" required>
+            </form>
+        </div>
+
+        <div id="countdownSection" style="display: none;">
+            <h2>Self-Destruct in:</h2>
+            <div id="timer">10</div>
+            <p id="completionMessage"></p>
+            
+            <button type="button" id="button1" onclick="abortSelfDestruct()">Abort</button>
+        </div>
+
+        <script>
+            let countdownInterval;
+
+            function confirmPassword() {
+                const passwordInput = document.getElementById('password');
+                const passwordSection = document.getElementById('passwordSection');
+                const countdownSection = document.getElementById('countdownSection');
+                const completionMessage = document.getElementById('completionMessage');
+                const timerElement = document.getElementById('timer');
+                const bodyElement = document.body;
+                const password = passwordInput.value.trim();
+        
+                if (password === '060921') {
+                    passwordSection.style.display = 'none';
+                    countdownSection.style.display = 'block';
+        
+                    let countdown = 10;
+                    countdownInterval = setInterval(() => {
+                        timerElement.textContent = countdown;
+                        countdown--;
+        
+                        if (countdown < 0) {
+                            clearInterval(countdownInterval);
+                            setTimeout(() => {
+                                window.location.replace("{{ url_for('aftermath') }}");
+                            }, 2000);
+                        }
+                    }, 1000);
+                } else {
+                    alert('Incorrect password. Self-Destruct sequence aborted.');
+                    // Redirect to the start page
+                    window.location.replace("{{ url_for('start') }}");
+                }
+
+                // Return false to prevent form submission
+                return false;
+            }
+
+            function abortSelfDestruct() {
+                clearInterval(countdownInterval);
+                alert('Self-Destruct sequence aborted.');
+                window.location.replace("{{ url_for('start') }}");
+            }
+
+        </script>        
+    </div>
+</body>
+</html>

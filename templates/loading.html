@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Loading</title>
+</head>
+<body>
+    <div class="loading-container">
+        <h1>Loading...</h1>
+        <p id="loading-status">Connecting...</p>
+
+        <script>
+            // Simulate connection process
+            let currentPercentage = 0;
+            const duration = 5;
+            const updateInterval = 250;
+
+            function tickUpTo100() {
+                const loadingStatus = document.getElementById('loading-status');
+
+                const intervalId = setInterval(() => {
+                    currentPercentage += Math.floor(Math.random() * 10) + 1;
+                    if (currentPercentage > 100) {
+                        currentPercentage = 100;
+                    }
+
+                    loadingStatus.textContent = `Connecting to satellite... ${currentPercentage}%`;
+
+                    if (currentPercentage === 100) {
+                        clearInterval(intervalId);
+                        loadingStatus.textContent = 'Connection restored.';
+                        // Redirect to the start page after a delay
+                        setTimeout(() => {
+                            window.location.replace("{{ url_for('start') }}");
+                        }, 2000);
+                    }
+                }, updateInterval);
+            }
+
+            // Start the connection process after a delay
+            setTimeout(tickUpTo100, 1000);
+        </script>
+    </div>
+</body>
+</html>

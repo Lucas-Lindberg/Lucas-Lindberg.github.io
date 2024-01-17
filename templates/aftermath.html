@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Self-Destruct Aftermath</title>
+</head>
+<body style="background-color: red;">
+    <div class="aftermath-container">
+        <h1>Self Destruct Sequence Engaged</h1>
+        <div id="impactInfo">
+            <!-- This div will be filled with the random impact information -->
+        </div>
+
+        <script>
+            // Function to generate a random integer between min and max (inclusive)
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            // Function to select a random element from an array
+            function getRandomElement(array) {
+                return array[Math.floor(Math.random() * array.length)];
+            }
+
+            function calculateImpact() {
+                const cities = [
+                    { name: "Stockholm, Sweden", population: 975904 },
+                    { name: "Lagos, Nigeria", population: 1436832 },
+                    { name: "Rio de Janeiro, Brazil", population: 6718903 },
+                    { name: "Mumbai, India", population: 12442373 },
+                    { name: "Shanghai, China", population: 26317104 },
+                    { name: "Karachi, Pakistan", population: 16093745 },
+                    { name: "Istanbul, Turkey", population: 15519267 },
+                    { name: "Moscow, Russia", population: 12506468 },
+                    { name: "Tokyo, Japan", population: 37833000 },
+                    { name: "Seoul, South Korea", population: 9720846 },
+                    { name: "Cairo, Egypt", population: 10425700 },
+                    { name: "Mexico City, Mexico", population: 9209944 },
+                    { name: "New York City, USA", population: 8175133 },
+                    { name: "London, UK", population: 8982256 },
+                    { name: "Paris, France", population: 2140526 },
+                    { name: "Berlin, Germany", population: 3520031 },
+                    { name: "Rome, Italy", population: 2872800 },
+                    { name: "Athens, Greece", population: 664046 },
+                    { name: "Cape Town, South Africa", population: 3789331 },
+                    { name: "Lima, Peru", population: 8953862 },
+                    { name: "Buenos Aires, Argentina", population: 3075646 },
+                    { name: "Sydney, Australia", population: 4741874 },
+                    { name: "Bangkok, Thailand", population: 8258151 },
+                    { name: "Mumbai, India", population: 12442373 },
+                    { name: "Toronto, Canada", population: 2731571 },
+                    { name: "Singapore", population: 5708844 },
+                    { name: "Dubai, UAE", population: 3155229 },
+                    { name: "São Paulo, Brazil", population: 12252023 },
+                    { name: "Jakarta, Indonesia", population: 10770487 },
+                    { name: "Hong Kong, China", population: 7500700 },
+                    { name: "Manila, Philippines", population: 13923452 },
+                    { name: "Mumbai, India", population: 12442373 },
+                    { name: "Los Angeles, USA", population: 3976322 },
+                    { name: "Chicago, USA", population: 2705994 },
+                    { name: "Houston, USA", population: 2320268 },
+                    { name: "Vancouver, Canada", population: 631486 },
+                    { name: "Montreal, Canada", population: 1704694 },
+                    { name: "Bogotá, Colombia", population: 7430436 },
+                    { name: "Caracas, Venezuela", population: 2888711 },
+                    { name: "Lisbon, Portugal", population: 506654 },
+                    { name: "Madrid, Spain", population: 3223334 },
+                    { name: "Berlin, Germany", population: 3520031 },
+                    { name: "Warsaw, Poland", population: 1702139 },
+                    { name: "Oslo, Norway", population: 1473955 },
+                    { name: "Helsinki, Finland", population: 656229 },
+                    { name: "Copenhagen, Denmark", population: 794128 },
+                    { name: "Reykjavik, Iceland", population: 130166 },
+                    { name: "Point Nemo (Pacific Ocean)", population: 0 }, // Famous point in the Pacific Ocean
+                    { name: "Lima, Peru", population: 8953862 },
+                    { name: "Bogotá, Colombia", population: 7430436 },
+                    { name: "Quito, Ecuador", population: 2827268 },
+                    { name: "Santiago, Chile", population: 5507282 },
+                    { name: "Brisbane, Australia", population: 2514184 },
+                    { name: "Auckland, New Zealand", population: 1734804 },
+                    { name: "Johannesburg, South Africa", population: 5995744 },
+                    { name: "Nairobi, Kenya", population: 4397073 },
+                    { name: "Casablanca, Morocco", population: 3359818 },
+                    { name: "Algiers, Algeria", population: 2672983 },
+                    { name: "Tunis, Tunisia", population: 1215397 },
+                    { name: "Bamako, Mali", population: 2428484 },
+                    { name: "Lome, Togo", population: 1994414 },
+                    { name: "Luanda, Angola", population: 3285872 },
+                    { name: "Abuja, Nigeria", population: 3531625 },
+                    { name: "Accra, Ghana", population: 2275498 },
+                    { name: "Dakar, Senegal", population: 2670096 },
+                    { name: "Conakry, Guinea", population: 1999312 },
+                    { name: "Freetown, Sierra Leone", population: 1271876 },
+                    { name: "Monrovia, Liberia", population: 1217095 },
+                    { name: "Bissau, Guinea-Bissau", population: 475953 },
+                    { name: "Brazzaville, Congo", population: 2147561 },
+                    { name: "Kinshasa, Democratic Republic of the Congo", population: 17878390 },
+                ];
+
+                const randomCity = getRandomElement(cities);
+                const etaDays = getRandomInt(1, 7);
+                const etaHours = getRandomInt(0, 23);
+                const etaMinutes = getRandomInt(0, 59);
+                const etaSeconds = getRandomInt(0, 59);
+
+                const predictedCasualties = Math.ceil((randomCity.population * 0.5));
+                const casualtiesText = predictedCasualties.toLocaleString(); // Add commas for readability
+
+                const impactInfo = document.getElementById('impactInfo');
+                impactInfo.innerHTML = `
+                    <p>Place of debris impact: ${randomCity.name}</p>
+                    <p>ETA: <span id="eta">${etaDays} days, ${etaHours} hours, ${etaMinutes} minutes, ${etaSeconds} seconds</span></p>
+                    <p>Predicted casualties: ${casualtiesText} deaths</p>
+                `;
+
+                // Countdown for ETA
+                const etaElement = document.getElementById('eta');
+                let countdown = etaDays * 24 * 60 * 60 + etaHours * 60 * 60 + etaMinutes * 60 + etaSeconds;
+
+                const countdownInterval = setInterval(() => {
+                    const days = Math.floor(countdown / (24 * 60 * 60));
+                    const hours = Math.floor((countdown % (24 * 60 * 60)) / (60 * 60));
+                    const minutes = Math.floor((countdown % (60 * 60)) / 60);
+                    const seconds = countdown % 60;
+
+                    etaElement.textContent = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        etaElement.textContent = 'Now';
+                    }
+
+                    countdown--;
+                }, 1000);
+            }
+
+            calculateImpact();
+        </script>
+    </div>
+</body>
+</html>
