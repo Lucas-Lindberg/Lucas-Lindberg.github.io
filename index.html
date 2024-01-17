@@ -4,142 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Website</title>
+    <title>Rocket Equation Calculator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f4f4f4;
+            background-color: #1a1a1a;
+            color: #fff;
         }
 
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: #2a2a2a;
             padding: 1em 0;
             text-align: center;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-            padding: 0.5em 0;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 1em;
-            padding: 0.5em 1em;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #555;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 3em 0;
-            background-color: #eee;
-        }
-
-        .hero h1 {
+        h1 {
+            margin: 0;
             font-size: 2.5em;
-            margin-bottom: 0.5em;
         }
 
-        .hero p {
-            font-size: 1.2em;
-            color: #555;
-        }
-
-        .cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        main {
             padding: 2em;
         }
 
-        .card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 1em;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card img {
-            width: 100%;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .card-content {
-            padding: 1em;
-        }
-
-        .card h2 {
-            margin-top: 0;
+        label {
+            display: block;
             margin-bottom: 0.5em;
-            color: #333;
+            font-size: 1.2em;
         }
 
-        .card p {
-            color: #666;
+        input {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 2em;
+            font-size: 1.5em;
+        }
+
+        footer {
+            background-color: #2a2a2a;
+            color: #888;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Cool Website</h1>
+        <h1>Rocket Equation Calculator</h1>
     </header>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-    </nav>
+    <main>
+        <label for="mass">Rocket Mass (kg):</label>
+        <input type="number" id="mass" placeholder="Enter rocket mass" required>
 
-    <div class="hero">
-        <h1>Welcome to the Cool Website</h1>
-        <p>Discover the coolest content and services on the internet.</p>
-    </div>
+        <label for="velocity">Exhaust Velocity (m/s):</label>
+        <input type="number" id="velocity" placeholder="Enter exhaust velocity" required>
 
-    <div class="cards">
-        <div class="card">
-            <img src="https://placekitten.com/300/200" alt="Kitten">
-            <div class="card-content">
-                <h2>Cute Kitten</h2>
-                <p>Explore adorable kitten pictures and videos.</p>
-            </div>
-        </div>
+        <button onclick="calculateRocketEquation()">Calculate</button>
 
-        <div class="card">
-            <img src="https://placebear.com/300/200" alt="Bear">
-            <div class="card-content">
-                <h2>Fierce Bear</h2>
-                <p>Discover the wild with stunning bear images.</p>
-            </div>
-        </div>
+        <div id="result"></div>
+    </main>
 
-        <div class="card">
-            <img src="https://placeimg.com/300/200/nature" alt="Nature">
-            <div class="card-content">
-                <h2>Beautiful Nature</h2>
-                <p>Immerse yourself in the beauty of nature.</p>
-            </div>
-        </div>
-    </div>
+    <footer>
+        <p>&copy; 2024 Rocket Equation Calculator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function calculateRocketEquation() {
+            const massElement = document.getElementById('mass');
+            const velocityElement = document.getElementById('velocity');
+            const resultElement = document.getElementById('result');
+
+            const mass = parseFloat(massElement.value);
+            const velocity = parseFloat(velocityElement.value);
+
+            if (!isNaN(mass) && !isNaN(velocity)) {
+                const deltaV = Math.log(2) * velocity;
+                const result = `Delta V (Change in velocity): ${deltaV.toFixed(2)} m/s`;
+                resultElement.textContent = result;
+            } else {
+                resultElement.textContent = 'Please enter valid numeric values for mass and velocity.';
+            }
+        }
+    </script>
 </body>
 
 </html>
