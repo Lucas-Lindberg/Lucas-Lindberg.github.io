@@ -1,21 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Satellite Login</title>
+    <title>Cool Website</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5em 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1em;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3em 0;
+            background-color: #eee;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2em;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1em;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .card-content {
+            padding: 1em;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="login-container">
-        <h1>Satellite Connection</h1>
-        <form action="{{ url_for('login') }}" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
-        </form>
+    <header>
+        <h1>Cool Website</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="hero">
+        <h1>Welcome to the Cool Website</h1>
+        <p>Discover the coolest content and services on the internet.</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <img src="https://placekitten.com/300/200" alt="Kitten">
+            <div class="card-content">
+                <h2>Cute Kitten</h2>
+                <p>Explore adorable kitten pictures and videos.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://placebear.com/300/200" alt="Bear">
+            <div class="card-content">
+                <h2>Fierce Bear</h2>
+                <p>Discover the wild with stunning bear images.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://placeimg.com/300/200/nature" alt="Nature">
+            <div class="card-content">
+                <h2>Beautiful Nature</h2>
+                <p>Immerse yourself in the beauty of nature.</p>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
